@@ -3,6 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoggerModule } from 'ngx-logger';
+import { environment } from 'src/environments/environment';
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -10,7 +15,15 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    CoreModule,
+    SharedModule,
+    LoggerModule.forRoot({
+      serverLoggingUrl: `http://my-api/logs`,
+      level: environment.logLevel,
+      serverLogLevel: environment.serverLogLevel
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
